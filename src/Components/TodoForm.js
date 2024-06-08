@@ -2,8 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import TodoItem from './TodoItem';
-import {addTodo} from "../features/todos/todosSlice";
 import styles from './TodoForm.module.css';
+import {addTodo} from "../Features/todos/todosSlice";
 
 const TodoForm = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
