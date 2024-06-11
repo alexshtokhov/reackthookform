@@ -1,11 +1,11 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import axios from 'axios';
 import styles from './LoginForm.module.css';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
-const LoginForm = ({ setIsAuthenticated }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+const LoginForm = ({setIsAuthenticated}) => {
+    const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -18,6 +18,11 @@ const LoginForm = ({ setIsAuthenticated }) => {
             console.error('Ошибка аутентификации:', error);
         }
     };
+    const registration = useNavigate();
+
+    const handleClick = () => {
+        registration('/registration');
+    };
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -25,7 +30,7 @@ const LoginForm = ({ setIsAuthenticated }) => {
                 <label className={styles.emailinput}>Email</label>
                 <input
                     type="email"
-                    {...register('email', { required: 'Email обязателен' })}
+                    {...register('email', {required: 'Email обязателен'})}
                 />
                 {errors.email && <p>{errors.email.message}</p>}
             </div>
@@ -34,12 +39,14 @@ const LoginForm = ({ setIsAuthenticated }) => {
                 <label className={styles.emailinput}>Password</label>
                 <input
                     type="password"
-                    {...register('password', { required: 'Пароль обязателен' })}
+                    {...register('password', {required: 'Пароль обязателен'})}
                 />
                 {errors.password && <p>{errors.password.message}</p>}
             </div>
-
-            <button type="submit">Войти</button>
+            <div>
+                <button className={styles.buttons} type="submit">Sign in</button>
+                <button type="submit" onClick={handleClick}>Sign up</button>
+            </div>
         </form>
     );
 };
